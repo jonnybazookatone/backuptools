@@ -77,7 +77,7 @@ class BackUpFolder(object):
 	
 		# New backups will follow a dating convention
 
-		destinationDIR = "%s_%s" % (self._BackUpPath,self._Date)
+		destinationDIR = "%s" % (self._BackUpPath)
 		print "Destination directory: %s" % destinationDIR
 
 		# Check the output folder does not exist
