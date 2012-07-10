@@ -48,6 +48,20 @@ class BackUpFolder(object):
 	def getBackUpPath(self):
 		return self._BackUpPath
 
+	def checkBackUps(self, numdel=4):
+
+		backup_path = os.path.expanduser(self._BackUpPath)
+		print "Backup path: %s" % backup_path
+		backup_glob = os.listdir("%s" % backup_path)
+		print "Found folders: %s" %  backup_glob
+		if len(backup_glob) > numdel:
+			print "Too many backups, deleting current selection"
+			for bkdir in backup_glob:
+				print "Deleting: %s/%s" % (backup_path, bkdir)
+				os.rmdir("%s/%s" % (backup_path, bkdir))
+		else:
+			print "You have less than %d backups, no deletions" % numdel
+
 	# Make itself if it does not exist
 	def makeMyself(self):
 		
