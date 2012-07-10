@@ -58,7 +58,7 @@ class BackUpFolder(object):
 			print "Too many backups, deleting current selection"
 			for bkdir in backup_glob:
 				print "Deleting: %s/%s" % (backup_path, bkdir)
-				os.rmdir("%s/%s" % (backup_path, bkdir))
+				shutil.rmtree("%s/%s" % (backup_path, bkdir))
 		else:
 			print "You have less than %d backups, no deletions" % numdel
 
