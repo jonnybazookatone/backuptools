@@ -94,7 +94,42 @@ class BackUpFolder(object):
 		# SCP protocol as it is easiest
 		cmd = ["scp", "-r", self._Name, recipient]
 		scp = subprocess.Popen(cmd).wait()
+		
+	def copyBackup(self, dest):
+	  
+		# Copy to another location
+		backupdir = "%s_%s" % (self._BackUpPath,self._Date)
+		dest = "%s/%s_%s" % (dest, self._Name)
+	
+		# Check the output folder does not exist
+		if not os.path.isdir(destinationDIR):
+			print "Backing up directory."
+			try:
+				# try to copy, if it doesn't work give an error
+				shutil.copytree(self._Name, destinationDIR)
+				print "Folder backed up successfully."
+			except IOError as (errno, strerror):
+				print "###########################"
+				print "Error, folder not backed up"
+				print "###########################"
+    				print "I/O error({0}): {1}".format(errno, strerror)
+			except:
+                                print "###########################"
+                                print "Error, folder not backed up"
+                                print "###########################"	
+			   	print "Unexpected error:", sys.exc_info()[0]
+				raise
+	
+		else:
+			# print to the user if the folder already exists
+			print "Folder already exists, you may have already backed up today."
+		
+		
+		shutil.copytree(self._Name, dest)
 
 if __name__ == "__main__":
+  
+	# Test bed
+  
 	main()
 # Fri Dec 2 15:21:08 CET 2011
